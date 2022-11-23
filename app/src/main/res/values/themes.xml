@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-  <style name="Theme.BasicM3Compose" parent="Theme.Material3.DayNight.NoActionBar">
-    <item name="colorPrimary">#FFb4262d</item>
-    <item name="colorPrimaryDark">#FF410004</item>
-    <item name="colorAccent">#FF98470b</item>
+  <!-- Allows us to override platform level specific attributes in their respective values-vXX folder. -->
+  <style name="Ui.Theme.Platform.Forlago" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- MaterialComponents theme is currently needed because there are no Compose DatePicker and have to fallback to the MC one. -->
+  </style>
 
+  <style name="Ui.Theme.Base.Forlago" parent="Ui.Theme.Platform.Forlago">
     <item name="android:windowActionModeOverlay">true</item>
     <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
-    <item name="android:navigationBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@color/ui_navigationBarColor</item>
     <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">?attr/isLightTheme</item>
+  </style>
+
+  <!-- The actual theme we use. This varies for light theme (here), and values-night for dark theme. -->
+  <style name="Ui.Theme.Forlago" parent="Ui.Theme.Base.Forlago">
+    <!-- These color attributes are needed only due to the use of non compose components like the Material Date Picker -->
+    <item name="colorPrimary">#FFb4262d</item>
+    <item name="colorPrimaryDark">#FF410004</item>
+    <item name="colorAccent">#FF98470b</item>
+  </style>
+
+  <!-- Allows us to override platform level specific attributes in their respective values-vXX folder. -->
+  <style name="Ui.Theme.Platform.SplashScreen" parent="Theme.SplashScreen">
+    <item name="android:windowLightStatusBar">true</item>
+    <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">true</item>
+  </style>
+
+  <style name="Ui.Theme.SplashScreen" parent="Ui.Theme.Platform.SplashScreen">
+    <item name="android:statusBarColor">@android:color/transparent</item>
+    <item name="android:navigationBarColor">@color/ui_navigationBarColor</item>
+    <item name="postSplashScreenTheme">@style/Ui.Theme.Forlago</item>
+    <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+    <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="S">1000</item>
   </style>
 
 </resources>
